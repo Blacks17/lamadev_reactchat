@@ -5,12 +5,10 @@ import { auth } from "../firebase";
 
 const Login = () => {
   const [err, setErr] = useState(false);
-  // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErr(false);
     const email = e.target[0].value;
     const password = e.target[1].value;
 
@@ -19,24 +17,18 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       setErr(true);
-      // setLoading(false);
     }
   };
-
   return (
     <div className='formContainer'>
       <div className='formWrapper'>
         <span className='logo'>Realtime Chat</span>
         <span className='title'>Login</span>
         <form onSubmit={handleSubmit}>
-          <input type='email' placeholder='email' />
-          <input type='password' placeholder='password' />
+          <input type='email' placeholder='Email' />
+          <input type='password' placeholder='Password' />
           <button>Sign in</button>
-          {err && (
-            <span style={{ color: "red", fontWeight: "bold" }}>
-              Something went wrong
-            </span>
-          )}
+          {err && <span>Something went wrong</span>}
         </form>
         <p>
           You don't have an account? <Link to='/register'>Register</Link>
